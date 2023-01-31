@@ -1,10 +1,19 @@
 import React from "react";
+import {
+  Hero,
+  Services,
+  FeaturedProducts,
+  Contact,
+} from "../Components/Components";
 
 const Home = () => {
   return (
-    <div>
-      <h2>Home Page</h2>
-    </div>
+    <main>
+      <Hero />
+      <FeaturedProducts />
+      <Services />
+      <Contact />
+    </main>
   );
 };
 

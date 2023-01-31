@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ProductProvider } from "./Context/ProductProvider";
 import {
   Home,
   About,
@@ -9,19 +10,39 @@ import {
   Products,
   SingleProduct,
 } from "./Pages";
+import Layout from "./Pages/Layout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Layout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/checkout",
+        element: <CheckOut />,
+      },
+      {
+        path: "/products/:id",
+        element: <SingleProduct />,
+      },
+    ],
   },
 ]);
 
 function App() {
   return (
-    <div>
+    <ProductProvider>
       <RouterProvider router={router} />
-    </div>
+    </ProductProvider>
   );
 }
 
