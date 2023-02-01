@@ -48,7 +48,7 @@ const ProductProvider = ({ children }) => {
     }
   };
 
-  const fetchSingleProduct = async () => {
+  const fetchSingleProduct = async (url) => {
     try {
       dispatch({ type: SINGLE_PRODUCT_BEGIN });
       const response = await axios.get(url);
