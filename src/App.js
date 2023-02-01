@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import CartProvider from "./Context/CartProvider";
 import FilterProductProvider from "./Context/FilterProduct";
 import { ProductProvider } from "./Context/ProductProvider";
 import {
@@ -51,7 +52,9 @@ function App() {
   return (
     <ProductProvider>
       <FilterProductProvider>
-        <RouterProvider router={router} />
+        <CartProvider>
+          <RouterProvider router={router} />
+        </CartProvider>
       </FilterProductProvider>
     </ProductProvider>
   );
