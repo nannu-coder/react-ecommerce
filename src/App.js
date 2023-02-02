@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CartProvider from "./Context/CartProvider";
 import FilterProductProvider from "./Context/FilterProduct";
 import { ProductProvider } from "./Context/ProductProvider";
+import { Auth0Provider } from "@auth0/auth0-react";
 import {
   Home,
   About,
@@ -13,6 +14,7 @@ import {
   SingleProduct,
 } from "./Pages";
 import Layout from "./Pages/Layout";
+import UserProvider from "./Context/UserProvider";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +32,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/checkout",
-        element: <CheckOut />,
+        element: (
+          <PrivateRoute>
+            <CheckOut />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/products/:id",
@@ -50,13 +56,24 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <ProductProvider>
-      <FilterProductProvider>
-        <CartProvider>
-          <RouterProvider router={router} />
-        </CartProvider>
-      </FilterProductProvider>
-    </ProductProvider>
+    <Auth0Provider
+      domain={process.env.REACT_APP_AUTH_DOMAIN}
+      clientId={process.env.REACT_APP_AUTH_CLIENT_ID}
+      authorizationParams={{
+        redirect_uri: window.location.origin,
+      }}
+      cacheLocation="localstorage"
+    >
+      <UserProvider>
+        <ProductProvider>
+          <FilterProductProvider>
+            <CartProvider>
+              <RouterProvider router={router} />
+            </CartProvider>
+          </FilterProductProvider>
+        </ProductProvider>
+      </UserProvider>
+    </Auth0Provider>
   );
 }
 

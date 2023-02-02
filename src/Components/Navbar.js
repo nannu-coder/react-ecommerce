@@ -6,9 +6,11 @@ import { FaBars } from "react-icons/fa";
 import { links } from "../utils/navLinks";
 import CartButton from "./CartButton";
 import useProductContext from "../useContext/useProductContext";
+import useUserContext from "../useContext/useUserContext";
 
 const Navbar = () => {
   const { sidebarOpen } = useProductContext();
+  const { myUser } = useUserContext();
   return (
     <NavContainer>
       <div className="nav-center">
@@ -29,6 +31,12 @@ const Navbar = () => {
               </li>
             );
           })}
+
+          {myUser && (
+            <li>
+              <Link to="/checkout">checkout</Link>
+            </li>
+          )}
         </ul>
         <CartButton />
       </div>
