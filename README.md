@@ -25,6 +25,10 @@
 
 Please feel free to contribute to this project by opening an issue or a pull request.
 
+## Project Preview
+
+![Comfy Sloth](https://i.postimg.cc/DfCM1FQZ/react-ecommerce.png)
+
 ## Author
 
 [Nannu](https://github.com/nannu-coder)
